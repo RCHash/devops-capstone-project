@@ -144,4 +144,9 @@ class TestAccountService(TestCase):
         resp = self.client.delete(f"{BASE_URL}/{account.id}")
         self.assertEqual(resp.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(resp.text, "")
+    
+    def test_delete_account_not_found(self):
+        """It should return 404_NOT_FOUND when trying to delete a non-existent account"""
+        resp = self.client.delete(f"{BASE_URL}/0")
+        self.assertEqual(resp.status_code, status.HTTP_404_NOT_FOUND)
     # ADD YOUR TEST CASES HERE ...
